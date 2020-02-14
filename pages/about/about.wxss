@@ -1,0 +1,64 @@
+
+.blank {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  width: 100%;
+  height: 350rpx;
+}
+.pic_view {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  width: 100%;
+  height: 258rpx;
+}
+.pic {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  width: 258rpx;
+  height: 258rpx;
+  border-width: 4rpx;
+  border-color: gray;
+  border-style: solid;
+  border-radius: 16rpx;
+}
+.name {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  font-size: 65rpx;
+  width: 100%;
+  height:90rpx;
+}
+.team {
+  display: flex;
+  align-items: center;
+  font-size: 40rpx;
+  width: 100%;
+  height:90rpx;
+}
+.version {
+  display: flex;
+  align-items: center;
+  font-size: 40rpx;
+  width: 100%;
+  height:90rpx;
+}
+.checkup {
+  display: flex;
+  align-items: center; 
+  font-size: 40rpx;
+  width: 100%;
+  height:90rpx;
+}
+.copyright {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  font-size: 26rpx;
+  color: gray;
+  width: 100%;
+  height:32rpx;
+}

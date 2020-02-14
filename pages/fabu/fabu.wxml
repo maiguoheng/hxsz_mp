@@ -1,0 +1,36 @@
+
+<view class="custonNavigation">
+  <image class="navi-img" src="../static/images/news.png"></image>
+  
+  <view class="navi-text">发布信息</view>
+</view>
+<view class="fill"></view>
+
+<view class="cu-bar bg-gray ">
+  <view class="action">
+    <text class="cuIcon-title text-blue"></text>欢迎使用华师闲置
+    
+  </view>
+</view>
+<view class="flex">
+
+  <view class='journal-container' bindtap='tosell'>
+    <image class='journal-preview' mode='aspectFill' src='/pages/static/images/hs2.jpg' />
+    <view class='shade'>
+      <view class="solid-bottom text-lg padding">
+        <text class="text-black">我要卖二手物品🙋</text>
+      </view>
+
+    </view>
+  </view>
+  <view class='journal-container' bindtap='towant'>
+    <image class='journal-preview' mode='aspectFill' src='/pages/static/images/hs2.jpg' />
+    <view class='shade'>
+      <view class="solid-bottom text-lg padding">
+        <text class="text-black">我要求购二手物品🙋</text>
+      </view>
+
+    </view>
+  </view>
+</view>
+

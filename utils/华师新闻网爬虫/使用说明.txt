@@ -1,0 +1,20 @@
+1.需要安装beautifulSoup4与requests
+   1)pip install beautifulSoup4 或在aconda 下 conda install beautifulSoup4
+   
+    2)pip install requests 或在aconda 下 conda install requests
+
+2.运行 网络爬虫.py
+   自动爬取华师新闻网 http://news.scnu.edu.cn/
+   中四个模块 新闻、深度、文化、全媒体中各4条新闻，共16条
+   爬取后与数据库中做对比，若数据库中不存在则将新闻保存
+
+3.保存内容
+   publish_order：保存顺序
+   date：新闻发布日期
+   title：新闻标题
+   type：
+     1）title_no_pic： 华师新闻网首页展示时无图片
+     2）title_have_pic：首页展示时无图片，在小程序中展示时图片用默认的华南师范大学图片代替
+     3）info_source：新闻来源，均为华师新闻网
+     4）imgUrl：首页展示新闻图片，若无则为华南师范大学图片代替
+     5）content：新闻主题内容 String类型，按原网站展示顺序存储了文字与图片地址，个内容以“@”来分割

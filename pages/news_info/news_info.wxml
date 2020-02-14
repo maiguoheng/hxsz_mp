@@ -1,0 +1,74 @@
+<!--pages/news_info/news_info.wxml-->
+<view class="keep">
+  <view class="custonNavigation">
+    <image class="navi-img" bindtap="back" src="{{1?'../static/images/prev.png ':'../static/images/news.png'}}"></image>
+    <view class="navi-text">快读·资讯</view>
+  </view>
+  <view class="fill"></view>
+</view>
+
+<view style="margin-top:150rpx"></view>
+
+<scroll-view class="notice" wx:if="{{hasNotice&&!titleSelected}}">
+  <view class="flex align-center ">
+    <view class="icon-view ">
+      <text class="icon-notification text-df "></text>
+    </view>
+    <view style="width: 84%;">
+      <view class="marquee-box ">
+        <view class="marquee-text " style="transform: translateX(-{{marqueeDistance}}px); ">
+          <text class="text-df ">{{noticeContent}}</text>
+          <text class="text-df " style="margin-right: {{marquee_margin}}px; "></text>
+          <text class="text-df " style="margin-right: {{marquee_margin}}px; ">{{noticeContent}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="icon-view ">
+      <text bindtap="closeNotice" class="icon-roundclosefill text-df "></text>
+    </view>
+  </view>
+</scroll-view>
+
+<view wx:if="{{!titleSelected}}" style="padding:20rpx;background-color:#f1f1f1">
+  <view class="swiper-item-list" wx:for="{{news}}" wx:key="{{item.id}}" bindtap='showDetail' data-id="{{item.id}}">
+    <view class="list-left">
+      <view class="list-title">{{item.attributes.title}}</view>
+      <view class="list-source-date">
+        <view class="list-source">华南师范大学新闻网</view>
+        <view class="list-date">{{item.attributes.date}}</view>
+      </view>
+    </view>
+    <view class="list-right">
+      <image src="{{item.attributes.imgUrl}}"></image>
+    </view>
+  </view>
+</view>
+
+<view wx:else class="pad" style="margin-top:33rpx">
+  <view class="detail-container bg-white">
+    <view class="news-title" style="padding: 30rpx 30rpx 0 30rpx">{{showNews.attributes.title}}</view>
+    <view class="news-wrapper">
+      <view class="news-wrapper-left" style="margin-top:5rpx">
+        <view>华南师大新闻网</view>
+        <view>{{showNews.attributes.date}}</view>
+      </view>
+    </view>
+    <view class="news-content bg-white" wx:for="{{news_content}}">
+      <view wx:if="{{item.type==1}}">
+        <text space="emsp"> {{item.content}}</text>
+        <view style="color:rgba(250,250,250,0.90)">seperator</view>
+      </view>
+      <block wx:else  class="bg-white">
+        <image src="{{item.content}}" style="margin-left:15rpx" />
+      </block>
+    </view>
+  </view>
+</view>
+
+
+<view class="to-end" wx:if="{{bottom&&!titleSelected&&showall}}">
+  <text class="text-gray text-center">加载完啦~~</text>
+  <text style="padding-bottom:8rpx">
+    登陆华师新闻官网查看更多
+  </text>
+</view>

@@ -1,0 +1,56 @@
+/* pages/home/home.wxss */
+@import"../self/self.wxss";
+.hr{
+  width:100%;
+  height: 10rpx;
+  background: white;
+}
+.news{
+  height:150px;
+  background-color:white;
+  text-align: center;
+}
+.outside_wdn{
+  width:100%;
+  height:250px;
+  display: inline-flex;
+}
+
+.inside_wdn{
+  width:47%;
+  height:243px;
+  background-color: white;
+  margin-left: 7px;
+  margin-top: 3px;
+  margin-bottom: 10px;
+  border-color:white;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 10px; 
+  display: table-column;
+  align-items: center;
+}
+.title1
+{
+  width:100%;
+  height:30px;
+  font-size: x-large;
+  text-align: center;
+  color:blue;
+}
+.inside_pic
+{
+  width:100%;
+  height:150px;
+  background: green;
+  border-color: white;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 5px; 
+}
+
+
+.stickyClass{
+    position: sticky;
+    top: 0 
+}

@@ -1,0 +1,12 @@
+<!--pages/help/help.wxml-->
+
+<swiper class="square-dot" wx:key indicator-dots="true" style="width:750rpx;height:{{height}}rpx">
+  <swiper-item wx:for="{{pic_url}}" wx:key>
+    <image style="width:750rpx;height:{{height}}rpx" src="{{item.attributes.pic_url}}"></image>
+  </swiper-item>
+</swiper>
+
+<view class="fixed" bindtap="toHome">
+    进入
+
+</view>

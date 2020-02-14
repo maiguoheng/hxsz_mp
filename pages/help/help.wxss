@@ -1,0 +1,35 @@
+/* pages/help/help.wxss */
+
+swiper.square-dot .wx-swiper-dot {
+    background: #3aa7ff;
+    opacity: 0.4;
+    width: 10rpx!important;
+    height: 10rpx!important;
+    border-radius: 20rpx!important;
+    transition: all 0.3s ease-in-out 0s!important;
+}
+
+/* 选中图片点的样式 */
+swiper.square-dot .wx-swiper-dot.wx-swiper-dot-active {
+    /*不透明度*/
+    opacity: 1;
+    /* 轮播图点宽度 */
+    width: 50rpx!important;
+}
+
+.fixed{
+  position: fixed;
+  height:80rpx;
+  width:120rpx;
+  color:#f8f9fd;
+  font-size:40rpx;
+  left:600rpx;
+  top:140rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border:4rpx solid #f8f9fd;
+  border-radius: 200rpx;
+  padding:10rpx;
+  opacity:0.7
+}

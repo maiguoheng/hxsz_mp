@@ -1,0 +1,147 @@
+<!--pages/sell/sell.wxml-->
+
+<view class="keep">
+  <view class="custonNavigation">
+    <image class="navi-img" bindtap="back" src="../static/images/prev.png"></image>
+    <view class="navi-text">求购物品</view>
+  </view>
+  <view class="fill"></view>
+</view>
+
+
+<form bindsubmit="formSubmit">
+
+<view class="cu-card case" style="padding-top:150rpx">
+  <view class="cu-item shadow">
+<view class="cu-form-group">
+<view class="cuIcon-title text-red"></view>
+		<view class="title">物品名称</view>
+		<input placeholder="为你求购的物品创建标题" name="name"></input>
+	</view></view></view>
+
+<view class="cu-card case">
+  <view class="cu-item shadow">
+  	<view class="cu-form-group">
+		<view class="action">
+    <view class="cuIcon-title text-red"></view>
+			上传物品图片(第一张图作为展示封面)
+		</view>
+		<view class="action">
+			{{imgList.length}}/9
+		</view>
+	</view>
+	<view class="cu-form-group">
+		<view class="grid col-4 grid-square flex-sub">
+			<view class="bg-img" wx:for="{{imgList}}" wx:key="{{index}}" bindtap="ViewImage" data-url="{{imgList[index]}}">
+				<image src='{{imgList[index]}}' mode='aspectFill'></image>
+				<view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+					<text class="cuIcon-close"></text>
+				</view>
+			</view>
+			<view class="solids" bindtap="ChooseImage" wx:if="{{imgList.length<9}}">
+				<text class="cuIcon-cameraadd"></text>
+			</view>
+		</view>
+	</view>
+ </view></view>
+
+
+
+<view class="cu-card case">
+  <view class="cu-item shadow">
+   <view class="cu-form-group">
+   <view class="cuIcon-title text-red"></view>
+    	<view class="title">商品分类</view>
+		<picker bindchange="PickerChange1" value="{{index1}}" range="{{picker1}}" name="sort">
+			<view class="picker">
+				{{index1?picker1[index1]:'选择商品分类'}}
+			</view>
+		</picker>
+	</view>
+  <view class="cu-form-group align-start">
+  <view class="cuIcon-title text-red"></view>
+		<view class="title">商品描述</view>
+		<textarea maxlength="-1" bindinput="textareaBInput" placeholder="" name="detail"></textarea>
+    
+	</view></view></view>
+  <view class="cu-card case">
+  <view class="cu-item shadow">
+  
+  <view class="cu-form-group">
+  <view class="cuIcon-title text-red"></view>
+		<view class="title">理想价格</view>
+		<input placeholder="请输入物品理想价格" name="s_price" type="number"></input>
+	</view></view></view>
+
+
+
+
+<view class="cu-card case">
+  <view class="cu-item shadow">
+
+
+  <view class="cu-form-group">
+  <view class="cuIcon-title text-red"></view>
+		<view class="title">手机号</view>
+		<input placeholder="手机号" name="phone_number" type="number" value="{{number}}"></input>
+	<view class='action'>
+    <button class='cu-btn bg-green ' bindtap='setphonenumber'>
+      一键填写
+    </button>
+  </view>
+  
+  </view>
+  
+  <view class="cu-form-group">
+  <view class="cuIcon-title text-red"></view>
+		<view class="title">微信号</view>
+		<input placeholder="微信号" name="wechat_number" value="{{wechat_number}}"></input>
+    <view class='action'>
+    <button class='cu-btn bg-green ' bindtap='setwechatnumber'>
+      一键填写
+    </button>
+  </view>
+	</view></view></view>
+   <view class="cu-card case">
+  <view class="cu-item shadow">
+<view class="cu-form-group">
+<view class="cuIcon-title text-red"></view>
+    	<view class="title">校区</view>
+		<picker bindchange="PickerChange" value="{{index}}" range="{{picker}}" name="schoolarea">
+			<view class="picker">
+				{{index?picker[index]:'选择所在校区'}}
+			</view>
+		</picker>
+	</view></view></view>
+<view class="padding flex flex-direction">
+  <button class="cu-btn bg-blue lg" formType="submit">确认发布</button>
+  
+</view>
+</form>
+
+<view class="cu-modal {{modalName_phone=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">提醒</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      要先在个人主页设置一键填写的内容噢
+    </view>
+  </view>
+</view>
+<view class="cu-modal bottom-modal {{modalName=='bottomModal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white">
+      <view class="action text-grey" bindtap="hideModal">确定</view>
+      <view class="action text-blue" bindtap="hideModal">取消</view>
+    </view>
+    <view class="padding-xl">
+    您还有未填写的内容
+    </view>
+  </view>
+</view>
+
+

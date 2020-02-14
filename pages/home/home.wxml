@@ -1,0 +1,155 @@
+<view class="keep">
+  <view class="custonNavigation">
+    <image class="navi-img" bindtap="back" src="{{titleSelected?'../static/images/prev.png ':'../static/images/news.png'}}"></image>
+    <view class="navi-text">华师闲置</view>
+  </view>
+  <view class="fill"></view>
+</view>
+
+<!-- tips:下面是商品展示部分 -->
+<view style="margin-top:150rpx">
+
+  <swiper class="card-swiper square-dot" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="500" bindchange="cardSwiper" indicator-color="#8799a3" indicator-active-color="#0081ff">
+    <swiper-item wx:for="{{swiperList}}" wx:key class="{{cardCur==index?'cur':''}}" bindtap='swipclick'>
+      <view class="swiper-item">
+        <image src="{{item.url}}"  wx:if="{{item.type=='image'}}" style="width: {{imageWidth}}px}}"></image>
+        <video src="{{item.url}}" autoplay loop muted show-play-btn="{{false}}" controls="{{false}}" objectFit="cover" wx:if="{{item.type=='video'}}"></video>
+      </view>
+    </swiper-item>
+  </swiper>
+    
+
+  <view class="cu-card article {{isCard?'no-card':''}} ">
+    <view class="cu-item shadow">
+      <view class="cu-bar bg-white ">
+        <view class="action">
+          <text class="cuIcon-title text-blue "></text> 校园资讯
+        </view>
+        <view class="action">
+          <button class="cu-btn bg-gray " bindtap="showModal" data-target="menuModal">查看更多</button>
+        </view>
+      </view>
+
+      <view class="title">
+        <view class="text-cut">{{news_title}}</view>
+      </view>
+      <view class="content">
+        <image src="{{news_photo}}" mode="aspectFill"></image>
+        <view class="desc">
+          <view class="text-content">{{news_content}}</view>
+          <view>
+            <view class="cu-tag bg-red light sm round">http://news.scnu.edu.cn/</view>
+            <view class="cu-tag bg-green light sm round">新闻</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+
+  <scroll-view scrollX class="stickyClass">
+    <view class="padding flex text-center text-grey bg-white shadow-warp" style="padding-bottom:0rpx">
+      <view bindtap="switchNav" data-currenttab="0" class="flex flex-sub flex-direction solid-right {{currentTab==0?'text-blue cur':''}}">
+        <view class="flex flex-sub flex-direction solid-right " data-currenttab="0">
+          <view class="margin-top-sm " data-currenttab="0" style="margin-bottom:8px">
+            <text class="icon-goods " data-currenttab="0">最新发布的闲置</text>
+          </view>
+        </view>
+      </view>
+
+      <view bindtap="switchNav" data-currenttab="1" class="flex flex-sub flex-direction  {{currentTab==1?'text-blue cur':''}}">
+        <view class="flex flex-sub flex-direction " data-currenttab="1">
+          <view class="margin-top-sm " data-currenttab="1" style="margin-bottom:8px">
+            <text class="icon-goods " data-currenttab="1">最新发布的求购</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <swiper bindchange="switchTab" current="{{currentTab}}" style="height:{{tabHeight}}rpx;margin-top:10rpx">
+    <!--闲置页面-->
+    <swiper-item wx:if="{{currentTab}}==0">
+      <scroll-view enableBackToTop="true" scrollTop="{{scrollTop}}" scrollY="true" style="height: {{tabHeight}}rpx;">
+        <view class="goods-container">
+          <view class="goods-box" wx:for-items="{{pub_notsell}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
+            <view class="img-box">
+              <image src="{{item.attributes.head_pic_url}}" class="image" mode="aspectFill" lazy-load="true" />
+
+            </view>
+            <view style='display: flex;font-weight:800'>
+              <view class=" goods-title " style="font-weight:800">{{item.attributes.g_name}}</view>
+              <view style="margin-top:24rpx;padding-right:18rpx;font-size:26rpx;flex-wrap:nowrap;width:35%; ">{{item.attributes.place}}</view>
+            </view>
+            <view style='display:flex;font-weight:800'>
+              <view class="goods-price ">¥ {{item.attributes.price}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="no-more-goods ">没有更多啦</view>
+
+      </scroll-view>
+    </swiper-item>
+
+    <!--求购页面-->
+    <swiper-item wx:if="{{currentTab}}==1 ">
+      <scroll-view enableBackToTop="true " scrollTop="{{scrollTop}}" scrollY="true " style="height: {{tabHeight}}rpx;">
+        <view class="goods-container ">
+          <view class="goods-box " wx:for-items="{{want_notsell}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
+            <view class="img-box ">
+              <image src="{{item.attributes.head_pic_url}}" class="image " mode="aspectFill " lazy-load="true" />
+
+            </view>
+            <view style='display: flex;font-weight:800'>
+              <view class="goods-title ">{{item.attributes.g_name}}</view>
+              <view style="margin-top:24rpx;padding-right:18rpx;font-size:26rpx;flex-wrap:nowrap;width:35%; ">{{item.attributes.place}}</view>
+            </view>
+            <view style='display:flex;font-weight:800'>
+              <view class="goods-price ">¥ {{item.attributes.price}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="no-more-goods ">没有更多啦</view>
+
+      </scroll-view>
+    </swiper-item>
+
+  </swiper>
+
+
+
+
+
+
+  <!--
+  <view class='title1'>闲置推荐</view>
+  <view class='hr'> </view>
+  <block wx:for="{{needlist}}">
+    <view class='outside_wdn'>
+      <view class='inside_wdn'>
+        <view class='inside_pic'>
+        <image  src="item.imgUrl" mode='scaleToFill'></image>
+        </view>
+        <view>{{item.title_1}}
+        </view>
+        <view>{{item.title_2}}
+        </view>
+      </view>
+      <view class='inside_wdn'>
+        <view class='inside_pic'>
+        <image  src="item.imgUrl" mode='scaleToFill'></image>
+        </view>
+        <view>{{item.title_1}}
+        </view>
+        <view>{{item.title_2}}
+        </view>
+      </view>
+    </view>
+  </block>
+  -->
+
+
+</view>
+
+<view style="margin-top:10px"></view>

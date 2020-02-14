@@ -1,0 +1,87 @@
+<!--pages/market/market.wxml-->
+<view class="keep">
+  <view class="custonNavigation">
+    <image class="navi-img" src="../static/images/news.png"></image>
+    <view class="navi-text">求购专区</view>
+  </view>
+  <view class="fill"></view>
+</view>
+
+<view style="margin-top:150rpx"></view>
+
+<view class="flex search">
+
+  <view style="width:90%;background-color:#f1f1f1;margin-left:20rpx;border-radius:100rpx;height:65rpx;line-height:65rpx;display:flex;align-items:center">
+    <text class="cuIcon-search margin-left text-gray"  style="line-height:65rpx"/>
+    <input value="{{keyword}}" bindconfirm="searchInfo" placeholder="搜索物品名" class="margin-left" style="width:100%;line-height:65rpx"></input>
+  </view>
+</view>
+
+<scroll-view scroll-x class="bg-white nav" scroll-with-animation scroll-left="{{scrollLeft}}">
+  <view class="cu-item {{index==TabCur?'text-green cur':''}}" wx:for="{{10}}" wx:key bindtap="tabSelect" data-id="{{index}}">
+    {{types[index]}}
+  </view>
+</scroll-view>
+
+
+<view wx:if="{{listData.length==0}}" class="flex margin-top padding" style="flex-direction:column;justify-content:center;align-items:center;">
+<image style="width:400rpx;width:400rpx" src="../static/images/notfound.png"/>
+<text style="font-size:50rpx;color:#000">该分类下暂无数据</text>
+</view>
+
+<view style="display:none">
+  <view  wx:for="{{listData}}" wx:key="index"> 
+    <view wx:for="{{item.imgUrl}}"  wx:key="*this" wx:for-item="imgItem">
+      <image src="{{imgItem}}" mode='widthFix' bindload="onImageLoad" data-index="{{item.index}}"></image>
+    </view>
+  </view>
+</view>
+
+<view class="list">
+  <view class='list-half'>
+    <view wx:for="{{col1}}" wx:key="index" class='card'>
+
+      <view wx:for="{{item.imgUrl}}" wx:key="*this" wx:for-item="imgItem">
+        <image src='{{imgItem}}' mode='widthFix' bindtap='tapImg' data-src="{{imgItem}}" data-list='{{item.imgUrl}}'></image>
+      </view>
+
+      <view class='font'>{{item.description}}</view>
+
+      <view style='display: flex; justify-content:space-between' bindtap="toDetailsTap" data-id="{{item.objectId}}">
+        <view style='display: flex;'>
+          <image wx:if="{{item.likeIt == true && isPermissed2 == true}}" src="../static/images/collect.png" class='heart' bindtap="tapCollect" data-src="{{item}}" data-loc="left"></image>
+          <image wx:else src="../static/images/notcollect.png" class='heart' bindtap="tapCollect" data-src="{{item}}" data-loc="left"></image>
+          <text class='heartNumber'> {{item.heartNum}}</text>
+        </view>
+        <text class='money'>￥{{item.value}}</text>
+      </view>
+
+      <view style='text-align: center;font-size: 12px;margin-top: 3px;font-weight: bold;'bindtap="toDetailsTap" data-id="{{item.objectId}}">发布地点：{{item.position}}</view>
+      <view style='text-align: center;font-size: 12px;margin-top: 3px;font-weight: bold;' bindtap="toDetailsTap" data-id="{{item.objectId}}">发布人：{{item.publisher}}</view>
+
+
+    </view>
+  </view>
+
+  <view class='list-half'>
+    <view wx:for="{{col2}}" wx:key="index"  class='card'>
+      <view wx:for="{{item.imgUrl}}" wx:key="*this" wx:for-item="imgItem">
+        <image src='{{imgItem}}' mode='widthFix' bindtap='tapImg' data-src="{{imgItem}}" data-list='{{item.imgUrl}}'></image>
+      </view>
+
+      <view class='font'>{{item.description}}</view>
+
+      <view style='display: flex; justify-content:space-between' bindtap="toDetailsTap" data-id="{{item.objectId}}">
+        <view style='display: flex;'>
+          <image wx:if="{{item.likeIt == true && isPermissed2 == true}}" src="../static/images/collect.png" class='heart' bindtap="tapCollect" data-src="{{item}}" data-loc="right"></image>
+          <image wx:else src="../static/images/notcollect.png" class='heart' bindtap="tapCollect" data-src="{{item}}" data-loc="right"></image>
+          <text class='heartNumber'> {{item.heartNum}}</text>
+        </view>
+        <text class='money'>￥{{item.value}}</text>
+      </view>
+
+      <view style='text-align: center;font-size: 12px;margin-top: 3px;font-weight: bold;'data-id="{{item.objectId}}" bindtap="toDetailsTap">发布地点：{{item.position}}</view>
+      <view data-id="{{item.objectId}}" bindtap="toDetailsTap" style='text-align: center;font-size: 12px;margin-top: 3px;font-weight: bold;'>发布人：{{item.publisher}}</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,186 @@
+<view class="keep">
+  <view class="custonNavigation">
+    <image class="navi-img" bindtap="back" src="../static/images/prev.png"></image>
+    <view class="navi-text">{{settint?'设置商品状态':'商品详情'}}</view>
+  </view>
+  <view class="fill"></view>
+</view>
+
+<view style="margin-top:65px; background-color: #F8F8F8"></view>
+
+<view class="container" wx:if="{{!setting}}" style="padding-bottom:30rpx!important">
+  <view class="swiper-container">
+    <swiper class="swiper_box" autoplay="{{false}}" indicator-dots="true" indicator-active-color="#3688ff">
+      <block wx:for="{{good_info.all_pic_url}}" wx:key="id">
+        <swiper-item style="display:flex;align-items:center;">
+          <image bindtap="previewImg" data-id="{{item}}" src="{{item}}" class="slide-image" mode="widthFix" lazy-load="true" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+
+  <view style="padding:10rpx 0;background:#fff;margin-top:25rpx">
+    <view style="display:flex;display-direction:row ;justify-content:space-between">
+      <view style="display:flex;align-items:center">
+        <view class="cu-avatar round margin-left" style="background-image:url({{show_touxiang}})">
+          <view class="cu-tag badge {{show_sex==1?'cuIcon-male bg-blue':'cuIcon-female bg-pink'}}"></view>
+        </view>
+        <view style="display:flex;flex-direction:column;margin-left:30rpx">
+          <view style="font-color:#000;font-size:40rpx"> {{show_nickname}}</view>
+          <view style="font-size:23rpx">发布于 {{pub_time}}</view>
+        </view>
+      </view>
+
+      <view bindtap="copywechat" class="center" style="margin:12rpx 34rpx 0 0;color:#16e40e;padding:15rpx;border-radius: 50rpx;border: 2rpx solid #16e40e;height:60rpx;">
+        <image style="height:40rpx;width:40rpx" src="../static/images/wechat.png" /> 联系他
+      </view>
+    </view>
+  </view>
+
+  <view class="goods-des-info" style="margin-top:10rpx">
+    <view class="label-title" style="display:flex;flex-direction:row;align-items:center;justify-content:space-between">商品详情
+      <image bindtap="collect" style="width:60rpx;height:50rpx;margin-left:320rpx" src="{{collect?'../static/images/collect.png':'../static/images/notcollect.png'}}" mode="scaleToFill" />
+      <text style="font-size:40rpx;" wx:if="{{status==0}}">出售中</text>
+      <text style="font-size:40rpx;" wx:if="{{status==1}}">求收购</text>
+      <text style="font-size:40rpx;color:#e64340" wx:if="{{status==2}}">已出售</text>
+      <text style="font-size:40rpx;color:#e64340" wx:if="{{status==3}}">已购得</text>
+    </view>
+  </view>
+  <view class="desc" style="display:flex;flex-direction:row;justify-content:space-between">
+    <view style="text-overflow: ellipsis;font-size:33rpx">{{demand_info.g_name}}</view>
+    <view style="display:flex;">
+      <view style="color:#e64340;margin-right:20rpx;font-size:33rpx">￥{{demand_info.price}}</view>
+      <view style="font-size:33rpx">{{demand_info.place}}校区</view>
+    </view>
+  </view>
+  <view class="desc" style="font-weight:28!important">{{demand_info.description}}</view>
+
+  <view class="center" style="margin-top:20rpx;background-color:#fff" wx:if="{{owner}}">
+    <view class="center" style="width:80%;padding:20rpx">
+      <view bindtap="setStatus" class="center setting" style="margin-right:50rpx;flex-co">
+        <image style="height:40rpx;width:40rpx" src="../static/images/设置.png" /> 设置
+      </view>
+
+      <view bindtap="deletedeproduct" class="center setting" style="color:#c00!important;border-color:#c00!important;margin-left:50rpx">
+        <image style="height:40rpx;width:40rpx" src="../static/images/删除.png" /> 删除
+      </view>
+    </view>
+  </view>
+  <block wx:else>
+    <view class="flex" style="flex-direction:row;margin-top:50rpx;font-size:30rpx;color:#90a4ae;justify-content:center">
+      <view style="width:40%;height:20rpx;border-bottom:1rpx solid #90a4ae" /> 他的更多
+      <view style="width:40%;height:20rpx;border-bottom:1rpx solid #90a4ae" />
+    </view>
+
+    <view class="margin-top">
+
+      <scroll-view scrollX class="stickyClass">
+        <view class="padding flex text-center text-grey bg-white shadow-warp" style="padding-bottom:0rpx">
+          <view bindtap="switchNav" data-currenttab="0" class="flex flex-sub flex-direction solid-right {{currentTab==0?'text-blue cur':''}}">
+            <view class="flex flex-sub flex-direction solid-right " data-currenttab="0">
+              <view class="margin-top-sm " data-currenttab="0" style="margin-bottom:8px">
+                <text class="icon-goods " data-currenttab="0">最新发布的闲置</text>
+              </view>
+            </view>
+          </view>
+
+          <view bindtap="switchNav" data-currenttab="1" class="flex flex-sub flex-direction  {{currentTab==1?'text-blue cur':''}}">
+            <view class="flex flex-sub flex-direction " data-currenttab="1">
+              <view class="margin-top-sm " data-currenttab="1" style="margin-bottom:8px">
+                <text class="icon-goods " data-currenttab="1">最新发布的求购</text>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+
+      <swiper bindchange="switchTab" current="{{currentTab}}" style="height:{{tabHeight}}rpx;margin-top:10rpx">
+        <!--闲置页面-->
+        <swiper-item wx:if="{{currentTab}}==0">
+          <scroll-view enableBackToTop="true" scrollTop="{{scrollTop}}" scrollY="true" style="height: {{tabHeight}}rpx;">
+            <view class="goods-container">
+              <view class="goods-box" wx:for-items="{{pub_notsell}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
+                <view class="img-box">
+                  <image src="{{item.attributes.head_pic_url}}" class="image" mode="aspectFill" lazy-load="true" />
+
+                </view>
+                <view style='display: flex;font-weight:800'>
+                  <view class=" goods-title " style="font-weight:800">{{item.attributes.g_name}}</view>
+                  <view style="margin-top:24rpx;padding-right:18rpx;font-size:26rpx;flex-wrap:nowrap;width:35%; ">{{item.attributes.place}}</view>
+                </view>
+                <view style='display:flex;font-weight:800'>
+                  <view class="goods-price ">¥ {{item.attributes.price}}</view>
+                </view>
+              </view>
+            </view>
+            <view class="no-more-goods ">没有更多啦</view>
+
+          </scroll-view>
+        </swiper-item>
+
+        <!--求购页面-->
+        <swiper-item wx:if="{{currentTab}}==1 ">
+          <scroll-view enableBackToTop="true " scrollTop="{{scrollTop}}" scrollY="true " style="height: {{tabHeight}}rpx;">
+            <view class="goods-container ">
+              <view class="goods-box " wx:for-items="{{want_notsell}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
+                <view class="img-box ">
+                  <image src="{{item.attributes.head_pic_url}}" class="image " mode="aspectFill " lazy-load="true" />
+
+                </view>
+                <view style='display: flex;font-weight:800'>
+                  <view class="goods-title ">{{item.attributes.g_name}}</view>
+                  <view style="margin-top:24rpx;padding-right:18rpx;font-size:26rpx;flex-wrap:nowrap;width:35%; ">{{item.attributes.place}}</view>
+                </view>
+                <view style='display:flex;font-weight:800'>
+                  <view class="goods-price ">¥ {{item.attributes.price}}</view>
+                </view>
+              </view>
+            </view>
+            <view class="no-more-goods ">没有更多啦</view>
+
+          </scroll-view>
+        </swiper-item>
+
+      </swiper>
+
+
+    </view>
+
+  </block>
+
+</view>
+
+<view class='select-container' wx:if="{{setting}}" style="height:100%">
+  <view>
+    <text class='for_font'>请为当前物品设置状态</text>
+    <view wx:if="{{status==0||status==2}}" style='margin-top:40rpx;color:#3688ff'>
+      <button class="weui-btn" type="default" plain="true" bindtap="changestatus" style="color:#353535;border-color:##353535" data-status="0">
+        <image wx:if="{{status==0}}" class="select-icon" src="../static/images/选中.png"></image>
+        出售中
+      </button>
+      <button class="weui-btn" data-status="2" type="default" plain="true" bindtap="changestatus" style='margin-top:40rpx'>
+        <image wx:if="{{status==2}}" class="select-icon" src="../static/images/选中.png"></image>
+        已出售
+      </button>
+    </view>
+
+    <view wx:if="{{status==1||status==3}}" style='margin-top:40rpx;color:#3688ff'>
+      <button class="weui-btn" type="default" plain="true" style='margin-top:40rpx' bindtap="changestatus" style="color:#353535;border-color:##353535" data-status="1">
+        <image wx:if="{{status==1}}" class="select-icon" src="../static/images/选中.png"></image>
+        求购中
+      </button>
+      <button class="weui-btn" type="default" data-status="3" plain="true" style='margin-top:40rpx' bindtap="changestatus">
+        <image wx:if="{{status==3}}" class="select-icon" src="../static/images/选中.png"></image>
+        已求购</button>
+      <view style="margin-top:30rpx;color:353535;font-size:40rpx">Tips:</view>
+
+
+    </view>
+
+  </view>
+  <view style="margin-top:40rpx;color:353535;font-size:37rpx">设置为已出售/已求购后，</view>
+  <view style="margin-top:35rpx;color:353535;font-size:37rpx">别人将无法获取您的微信</view>
+
+
+</view>

@@ -1,0 +1,46 @@
+
+.list {
+  padding: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+ 
+.list .list-half {
+  width: 346rpx;
+  box-sizing: border-box;
+}
+.list-half .card {
+  background-color: rgb(255, 255, 255);
+  border-radius: 20rpx;
+  overflow: hidden;
+  margin-bottom: 30rpx;
+  padding-bottom: 20rpx;
+  border-color: #b8bdc2;
+  border-style: solid;
+}
+.font {
+  width: fit-content;
+  font-size: 33rpx;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  display:block;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.heart {
+  margin-left: 5px;
+  width: 20px;
+  height: 20px;
+  margin-top: 5px;
+}
+.heartNumber {
+  font-size: 15px;
+  margin-top: 4px;
+  margin-right: 10px;
+}
+.money {
+  font-size: 13px;
+  margin-top: 5px;
+  margin-right: 5px;
+}

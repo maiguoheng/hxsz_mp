@@ -1,0 +1,71 @@
+{
+  "pages": [
+    "pages/help/help",
+    "pages/home/home",
+    "pages/self/self",
+    "pages/test/test",
+    "pages/start/start",
+    "pages/goods_detail/goods_detail",
+    "pages/fabu/fabu",
+    "pages/market/market",
+    "pages/neededMarket/neededMarket",
+    "pages/news_info/news_info",
+    "pages/sell/sell",
+    "pages/sell_ok/sell_ok",
+    "pages/want/want",
+    "pages/want_ok/want_ok",
+    "pages/setwechatnumber/setwechatnumber",
+    "pages/setphonenumber/setphonenumber",
+    "pages/about/about",
+    "pages/suggestion/suggestion"
+
+  ],
+  "window": {
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#ffffff",
+    "selectedColor": "#ffffff",
+    "backgroundColor": "#3688ff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/home/home",
+        "iconPath": "pages/static/images/皇冠.png",
+        "selectedIconPath": "pages/static/images/皇冠_选中.png"
+      },
+      {
+        "text": "二手商品",
+        "pagePath": "pages/market/market",
+        "iconPath": "pages/static/images/新闻.png",
+        "selectedIconPath": "pages/static/images/新闻_选中.png"
+      },
+     
+      {
+        "text": "发布",
+        "pagePath": "pages/fabu/fabu",
+        "iconPath": "pages/static/images/添加.png",
+        "selectedIconPath": "pages/static/images/添加_选中.png"
+
+      },
+      {
+        "text": "求购",
+        "pagePath": "pages/neededMarket/neededMarket",
+        "iconPath":"pages/static/images/开心.png",
+        "selectedIconPath": "pages/static/images/开心_选中.png"
+
+       
+
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/self/self",
+        "iconPath": "pages/static/images/我的.png",
+        "selectedIconPath": "pages/static/images/我的_选中.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}
